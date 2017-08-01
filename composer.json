@@ -1,6 +1,6 @@
 {
     "name": "lc5/typed-collection",
-    "description": "Typed collection.",
+    "description": "Create strictly typed collections in PHP",
     "keywords": ["collection", "typed collection"],
     "homepage": "https://github.com/Lc5/TypedCollection",
     "license": "MIT",
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
