@@ -61,7 +61,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
     /**
      * @param mixed $element
      */
-    private function checkType($element)
+    protected function checkType($element)
     {
         $type = $this->getType();
 
