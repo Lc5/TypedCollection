@@ -1,0 +1,24 @@
+{
+    "name": "lc5/typed-collection",
+    "description": "Typed collection.",
+    "keywords": ["collection", "typed collection"],
+    "homepage": "https://github.com/Lc5/TypedCollection",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Łukasz Krzyszczak",
+            "email": "lukasz.krzyszczak@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lc5\\TypedCollection\\": "src/Lc5/TypedCollection"
+        }
+    }
+}
