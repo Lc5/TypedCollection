@@ -4,7 +4,7 @@ Create strictly typed collections in PHP.
 ## Installation
 
 ```
-$ composer install lc5/typed-collection
+$ composer require lc5/typed-collection
 ```
 
 ## AbstractTypedCollection:
