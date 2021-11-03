@@ -43,3 +43,6 @@ jobs:
 
     - name: Run static analysis
       run: vendor/bin/phpstan analyse
+
+    - name: Run coding standards check
+      run: vendor/bin/ecs check src test
