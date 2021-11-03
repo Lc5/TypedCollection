@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lc5\TypedCollection;
 
 use PHPUnit\Framework\TestCase;
@@ -30,7 +32,7 @@ class AbstractTypedCollectionTest extends TestCase
      */
     public function testOffsetSet($type, $element)
     {
-        $collection   = $this->buildCollection($type);
+        $collection = $this->buildCollection($type);
         $collection[] = $element;
 
         $this->assertSame($element, $collection[0]);
@@ -78,7 +80,7 @@ class AbstractTypedCollectionTest extends TestCase
     public function testOffsetSetThrowsUnexpectedValueException($type, $element)
     {
         $this->expectException(\UnexpectedValueException::class);
-        $collection   = $this->buildCollection($type);
+        $collection = $this->buildCollection($type);
         $collection[] = $element;
     }
 
@@ -129,7 +131,9 @@ class AbstractTypedCollectionTest extends TestCase
             ['resource', [fopen('php://memory', 'r'), fopen('php://memory', 'r')]],
             ['NULL',     [null, null]],
             ['stdClass', [new \stdClass(), new \stdClass()]],
-            ['Closure',  [function(){}, function(){}]]
+            ['Closure',  [function () {
+            }, function () {
+            }]]
         ];
     }
 
@@ -138,7 +142,8 @@ class AbstractTypedCollectionTest extends TestCase
      */
     public function invalidCollectionDataProvider()
     {
-        $allTypes = [true, 1, 1.11, 'string', [], new \stdClass(), fopen('php://memory', 'r'), null, function(){}];
+        $allTypes = [true, 1, 1.11, 'string', [], new \stdClass(), fopen('php://memory', 'r'), null, function () {
+        }];
 
         return [
             ['boolean',  $allTypes],
@@ -169,7 +174,8 @@ class AbstractTypedCollectionTest extends TestCase
             ['resource', fopen('php://memory', 'r+')],
             ['NULL',     null],
             ['stdClass', new \stdClass()],
-            ['Closure',  function(){}]
+            ['Closure',  function () {
+            }]
         ];
     }
 
@@ -179,16 +185,17 @@ class AbstractTypedCollectionTest extends TestCase
     public function invalidDataProvider()
     {
         $allTypes = [
-            'boolean'   => true,
-            'integer'   => 1,
-            'double'    => 1.11,
-            'string'    => 'string',
-            'array'     => [],
-            'object'    => new \stdClass(),
-            'resource'  => fopen('php://memory', 'r'),
-            'NULL'      => null,
-            'stdClass'  => new \stdClass(),
-            'Closure'   => function(){}
+            'boolean' => true,
+            'integer' => 1,
+            'double' => 1.11,
+            'string' => 'string',
+            'array' => [],
+            'object' => new \stdClass(),
+            'resource' => fopen('php://memory', 'r'),
+            'NULL' => null,
+            'stdClass' => new \stdClass(),
+            'Closure' => function () {
+            }
         ];
         
         return [
@@ -302,7 +309,8 @@ class AbstractTypedCollectionTest extends TestCase
             [new \stdClass()],
             [fopen('php://memory', 'r')],
             [null],
-            [function(){}]
+            [function () {
+            }]
         ];
     }
 }
