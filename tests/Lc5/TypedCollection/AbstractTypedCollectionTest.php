@@ -31,7 +31,7 @@ class AbstractTypedCollectionTest extends \PHPUnit_Framework_TestCase
         $collection   = $this->buildCollection($type);
         $collection[] = $element;
 
-        $this->assertSame($element, reset($collection));
+        $this->assertSame($element, $collection[0]);
     }
 
     /**
