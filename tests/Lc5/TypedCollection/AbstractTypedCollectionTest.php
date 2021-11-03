@@ -2,12 +2,14 @@
 
 namespace Lc5\TypedCollection;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class TypedCollectionTest
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
-class AbstractTypedCollectionTest extends \PHPUnit_Framework_TestCase
+class AbstractTypedCollectionTest extends TestCase
 {
     /**
      * @dataProvider validCollectionDataProvider
@@ -50,10 +52,10 @@ class AbstractTypedCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidTypeDataProvider
      * @param string $type
-     * @expectedException \LogicException
      */
     public function testConstructThrowsLogicException($type)
     {
+        $this->expectException(\LogicException::class);
         $this->buildCollection($type);
     }
 
@@ -61,10 +63,10 @@ class AbstractTypedCollectionTest extends \PHPUnit_Framework_TestCase
      * @dataProvider invalidCollectionDataProvider
      * @param string $type
      * @param array $elements
-     * @expectedException \UnexpectedValueException
      */
     public function testConstructThrowsUnexpectedValueException($type, array $elements)
     {
+        $this->expectException(\UnexpectedValueException::class);
         $this->buildCollection($type, $elements);
     }
 
@@ -72,10 +74,10 @@ class AbstractTypedCollectionTest extends \PHPUnit_Framework_TestCase
      * @dataProvider invalidDataProvider
      * @param string $type
      * @param mixed $element
-     * @expectedException \UnexpectedValueException
      */
     public function testOffsetSetThrowsUnexpectedValueException($type, $element)
     {
+        $this->expectException(\UnexpectedValueException::class);
         $collection   = $this->buildCollection($type);
         $collection[] = $element;
     }
@@ -84,10 +86,10 @@ class AbstractTypedCollectionTest extends \PHPUnit_Framework_TestCase
      * @dataProvider invalidCollectionDataProvider
      * @param string $type
      * @param array $elements
-     * @expectedException \UnexpectedValueException
      */
     public function testExchangeArrayThrowsUnexpectedValueException($type, array $elements)
     {
+        $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
         $collection->exchangeArray($elements);
     }

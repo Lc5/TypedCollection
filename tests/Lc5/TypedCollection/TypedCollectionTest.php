@@ -2,12 +2,14 @@
 
 namespace Lc5\TypedCollection;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class TypedCollectionTest
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
-class TypedCollectionTest extends \PHPUnit_Framework_TestCase
+class TypedCollectionTest extends TestCase
 {
     public function testGetType()
     {
