@@ -88,17 +88,20 @@ final class AbstractTypedCollectionTest extends TestCase
 
     private function buildCollection(string $type, array $elements = null): AbstractTypedCollection
     {
-        $collection = $this->getMockBuilder(AbstractTypedCollection::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getType'])
-            ->getMockForAbstractClass();
+        return new class($type, $elements) extends AbstractTypedCollection {
+            private string $type;
 
-        $collection->expects($this->any())->method('getType')->will($this->returnValue($type));
+            public function __construct(string $type, array $elements = null)
+            {
+                $this->type = $type;
+                parent::__construct($elements);
+            }
 
-        $reflectedClass = new \ReflectionClass(AbstractTypedCollection::class);
-        $reflectedClass->getConstructor()->invoke($collection, $elements);
-
-        return $collection;
+            protected function getType(): string
+            {
+                return $this->type;
+            }
+        };
     }
 
     public function validCollectionDataProvider(): array
