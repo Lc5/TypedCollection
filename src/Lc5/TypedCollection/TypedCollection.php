@@ -11,10 +11,7 @@ namespace Lc5\TypedCollection;
  */
 class TypedCollection extends AbstractTypedCollection
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     /**
      * @param string $type
