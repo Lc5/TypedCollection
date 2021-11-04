@@ -26,10 +26,7 @@ final class TypedCollection extends AbstractTypedCollection
         parent::__construct($elements, $flags, $iteratorClass);
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

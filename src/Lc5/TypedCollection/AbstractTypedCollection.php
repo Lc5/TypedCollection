@@ -11,10 +11,7 @@ namespace Lc5\TypedCollection;
  */
 abstract class AbstractTypedCollection extends \ArrayObject
 {
-    /**
-     * @return string
-     */
-    abstract protected function getType();
+    abstract protected function getType(): string;
 
     /**
      * @param array|null $elements
@@ -23,7 +20,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
      */
     public function __construct(array $elements = null, $flags = 0, $iteratorClass = \ArrayIterator::class)
     {
-        if (!is_string($this->getType()) || $this->getType() === '') {
+        if ($this->getType() === '') {
             throw new \LogicException(__CLASS__ . '::getType should return not empty string.');
         }
 
@@ -40,7 +37,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->checkType($value);
 
@@ -49,9 +46,9 @@ abstract class AbstractTypedCollection extends \ArrayObject
 
     /**
      * @param mixed $elements
-     * @return array
+     * @return mixed[]
      */
-    public function exchangeArray($elements)
+    public function exchangeArray($elements): array
     {
         foreach ($elements as $element) {
             $this->checkType($element);

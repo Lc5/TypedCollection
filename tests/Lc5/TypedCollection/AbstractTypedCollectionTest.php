@@ -15,9 +15,9 @@ final class AbstractTypedCollectionTest extends TestCase
 {
     /**
      * @dataProvider validCollectionDataProvider
-     * @param string $type
+     * @param array<int, mixed> $elements
      */
-    public function testConstruct($type, array $elements)
+    public function testConstruct(string $type, array $elements): void
     {
         $collection = $this->buildCollection($type, $elements);
 
@@ -26,10 +26,9 @@ final class AbstractTypedCollectionTest extends TestCase
 
     /**
      * @dataProvider validDataProvider
-     * @param string $type
      * @param mixed $element
      */
-    public function testOffsetSet($type, $element)
+    public function testOffsetSet(string $type, $element): void
     {
         $collection = $this->buildCollection($type);
         $collection[] = $element;
@@ -39,9 +38,9 @@ final class AbstractTypedCollectionTest extends TestCase
 
     /**
      * @dataProvider validCollectionDataProvider
-     * @param string $type
+     * @param array<int, mixed> $elements
      */
-    public function testExchangeArray($type, array $elements)
+    public function testExchangeArray(string $type, array $elements): void
     {
         $collection = $this->buildCollection($type);
         $collection->exchangeArray($elements);
@@ -49,21 +48,17 @@ final class AbstractTypedCollectionTest extends TestCase
         $this->assertSame($elements, (array) $collection);
     }
 
-    /**
-     * @dataProvider invalidTypeDataProvider
-     * @param string $type
-     */
-    public function testConstructThrowsLogicException($type)
+    public function testConstructThrowsLogicException(): void
     {
         $this->expectException(\LogicException::class);
-        $this->buildCollection($type);
+        $this->buildCollection('');
     }
 
     /**
      * @dataProvider invalidCollectionDataProvider
-     * @param string $type
+     * @param array<int, mixed> $elements
      */
-    public function testConstructThrowsUnexpectedValueException($type, array $elements)
+    public function testConstructThrowsUnexpectedValueException(string $type, array $elements): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $this->buildCollection($type, $elements);
@@ -71,10 +66,9 @@ final class AbstractTypedCollectionTest extends TestCase
 
     /**
      * @dataProvider invalidDataProvider
-     * @param string $type
      * @param mixed $element
      */
-    public function testOffsetSetThrowsUnexpectedValueException($type, $element)
+    public function testOffsetSetThrowsUnexpectedValueException(string $type, $element): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
@@ -83,9 +77,9 @@ final class AbstractTypedCollectionTest extends TestCase
 
     /**
      * @dataProvider invalidCollectionDataProvider
-     * @param string $type
+     * @param array<int, mixed> $elements
      */
-    public function testExchangeArrayThrowsUnexpectedValueException($type, array $elements)
+    public function testExchangeArrayThrowsUnexpectedValueException(string $type, array $elements): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
@@ -93,11 +87,10 @@ final class AbstractTypedCollectionTest extends TestCase
     }
 
     /**
-     * @param string $type
      * @param array|null $elements
      * @return AbstractTypedCollection|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function buildCollection($type, array $elements = null)
+    private function buildCollection(string $type, array $elements = null)
     {
         $collection = $this->getMockBuilder(\Lc5\TypedCollection\AbstractTypedCollection::class)
             ->disableOriginalConstructor()
@@ -113,9 +106,9 @@ final class AbstractTypedCollectionTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<string|bool[]|Closure():void[]|float[]|int[]|resource[]|\stdClass[]|string[]|null[]|class-string<\Closure>|class-string<\stdClass>>>
      */
-    public function validCollectionDataProvider()
+    public function validCollectionDataProvider(): array
     {
         return [
             ['boolean',  [true, false]],
@@ -127,18 +120,18 @@ final class AbstractTypedCollectionTest extends TestCase
             ['resource', [fopen('php://memory', 'r'), fopen('php://memory', 'r')]],
             ['NULL',     [null, null]],
             [\stdClass::class, [new \stdClass(), new \stdClass()]],
-            [\Closure::class,  [function () {
-            }, function () {
+            [\Closure::class,  [function (): void {
+            }, function (): void {
             }]]
         ];
     }
 
     /**
-     * @return array
+     * @return array<int, array<string|int[]|float[]|string[]|mixed[][]|bool[]|Closure():void[]|resource[]|\stdClass[]|null[]|class-string<\Closure>|class-string<\stdClass>>>
      */
-    public function invalidCollectionDataProvider()
+    public function invalidCollectionDataProvider(): array
     {
-        $allTypes = [true, 1, 1.11, 'string', [], new \stdClass(), fopen('php://memory', 'r'), null, function () {
+        $allTypes = [true, 1, 1.11, 'string', [], new \stdClass(), fopen('php://memory', 'r'), null, function (): void {
         }];
 
         return [
@@ -156,9 +149,9 @@ final class AbstractTypedCollectionTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<int, array<bool|Closure():void|float|int|resource|\stdClass|string|null>>
      */
-    public function validDataProvider()
+    public function validDataProvider(): array
     {
         return [
             ['boolean',  true],
@@ -170,15 +163,15 @@ final class AbstractTypedCollectionTest extends TestCase
             ['resource', fopen('php://memory', 'r+')],
             ['NULL',     null],
             [\stdClass::class, new \stdClass()],
-            [\Closure::class,  function () {
+            [\Closure::class,  function (): void {
             }]
         ];
     }
 
     /**
-     * @return array
+     * @return array<int, array<bool|Closure():void|float|int|resource|\stdClass|string|null>>
      */
-    public function invalidDataProvider()
+    public function invalidDataProvider(): array
     {
         $allTypes = [
             'boolean' => true,
@@ -190,7 +183,7 @@ final class AbstractTypedCollectionTest extends TestCase
             'resource' => fopen('php://memory', 'r'),
             'NULL' => null,
             \stdClass::class => new \stdClass(),
-            \Closure::class => function () {
+            \Closure::class => function (): void {
             }
         ];
         
@@ -291,22 +284,6 @@ final class AbstractTypedCollectionTest extends TestCase
             [\Closure::class, $allTypes['resource']],
             [\Closure::class, $allTypes['NULL']],
             [\Closure::class, $allTypes[\stdClass::class]]
-        ];
-    }
-
-    public function invalidTypeDataProvider()
-    {
-        return [
-            [true],
-            [1],
-            [1.11],
-            [''],
-            [[]],
-            [new \stdClass()],
-            [fopen('php://memory', 'r')],
-            [null],
-            [function () {
-            }]
         ];
     }
 }

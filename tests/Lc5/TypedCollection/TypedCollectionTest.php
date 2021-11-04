@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class TypedCollectionTest extends TestCase
 {
-    public function testGetType()
+    public function testGetType(): void
     {
         $typedCollection = new TypedCollection('type');
 
