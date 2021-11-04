@@ -16,7 +16,6 @@ class AbstractTypedCollectionTest extends TestCase
     /**
      * @dataProvider validCollectionDataProvider
      * @param string $type
-     * @param array $elements
      */
     public function testConstruct($type, array $elements)
     {
@@ -41,7 +40,6 @@ class AbstractTypedCollectionTest extends TestCase
     /**
      * @dataProvider validCollectionDataProvider
      * @param string $type
-     * @param array $elements
      */
     public function testExchangeArray($type, array $elements)
     {
@@ -64,7 +62,6 @@ class AbstractTypedCollectionTest extends TestCase
     /**
      * @dataProvider invalidCollectionDataProvider
      * @param string $type
-     * @param array $elements
      */
     public function testConstructThrowsUnexpectedValueException($type, array $elements)
     {
@@ -87,7 +84,6 @@ class AbstractTypedCollectionTest extends TestCase
     /**
      * @dataProvider invalidCollectionDataProvider
      * @param string $type
-     * @param array $elements
      */
     public function testExchangeArrayThrowsUnexpectedValueException($type, array $elements)
     {
