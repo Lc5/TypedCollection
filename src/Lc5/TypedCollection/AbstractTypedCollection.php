@@ -23,7 +23,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
      */
     public function __construct(array $elements = null, $flags = 0, $iteratorClass = 'ArrayIterator')
     {
-        if (!is_string($this->getType()) || strlen($this->getType()) === 0) {
+        if (!is_string($this->getType()) || $this->getType() === '') {
             throw new \LogicException(__CLASS__ . '::getType should return not empty string.');
         }
 

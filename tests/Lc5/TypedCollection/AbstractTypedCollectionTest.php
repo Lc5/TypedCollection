@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
-class AbstractTypedCollectionTest extends TestCase
+final class AbstractTypedCollectionTest extends TestCase
 {
     /**
      * @dataProvider validCollectionDataProvider

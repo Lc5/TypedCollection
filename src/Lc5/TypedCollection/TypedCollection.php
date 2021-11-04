@@ -9,7 +9,7 @@ namespace Lc5\TypedCollection;
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
-class TypedCollection extends AbstractTypedCollection
+final class TypedCollection extends AbstractTypedCollection
 {
     private string $type;
 
