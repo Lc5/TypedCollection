@@ -86,13 +86,9 @@ final class AbstractTypedCollectionTest extends TestCase
         $collection->exchangeArray($elements);
     }
 
-    /**
-     * @param array|null $elements
-     * @return AbstractTypedCollection|\PHPUnit_Framework_MockObject_MockObject
-     */
-    private function buildCollection(string $type, array $elements = null)
+    private function buildCollection(string $type, array $elements = null): AbstractTypedCollection
     {
-        $collection = $this->getMockBuilder(\Lc5\TypedCollection\AbstractTypedCollection::class)
+        $collection = $this->getMockBuilder(AbstractTypedCollection::class)
             ->disableOriginalConstructor()
             ->setMethods(['getType'])
             ->getMockForAbstractClass();
@@ -105,9 +101,6 @@ final class AbstractTypedCollectionTest extends TestCase
         return $collection;
     }
 
-    /**
-     * @return array<int, array<string|bool[]|Closure():void[]|float[]|int[]|resource[]|\stdClass[]|string[]|null[]|class-string<\Closure>|class-string<\stdClass>>>
-     */
     public function validCollectionDataProvider(): array
     {
         return [
@@ -126,9 +119,6 @@ final class AbstractTypedCollectionTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<int, array<string|int[]|float[]|string[]|mixed[][]|bool[]|Closure():void[]|resource[]|\stdClass[]|null[]|class-string<\Closure>|class-string<\stdClass>>>
-     */
     public function invalidCollectionDataProvider(): array
     {
         $allTypes = [true, 1, 1.11, 'string', [], new \stdClass(), fopen('php://memory', 'r'), null, function (): void {
@@ -148,9 +138,6 @@ final class AbstractTypedCollectionTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<int, array<bool|Closure():void|float|int|resource|\stdClass|string|null>>
-     */
     public function validDataProvider(): array
     {
         return [
@@ -168,9 +155,6 @@ final class AbstractTypedCollectionTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<int, array<bool|Closure():void|float|int|resource|\stdClass|string|null>>
-     */
     public function invalidDataProvider(): array
     {
         $allTypes = [

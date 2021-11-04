@@ -13,12 +13,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
 {
     abstract protected function getType(): string;
 
-    /**
-     * @param array|null $elements
-     * @param int $flags
-     * @param string $iteratorClass
-     */
-    public function __construct(array $elements = null, $flags = 0, $iteratorClass = \ArrayIterator::class)
+    public function __construct(array $elements = null, int $flags = 0, string $iteratorClass = \ArrayIterator::class)
     {
         if ($this->getType() === '') {
             throw new \LogicException(__CLASS__ . '::getType should return not empty string.');

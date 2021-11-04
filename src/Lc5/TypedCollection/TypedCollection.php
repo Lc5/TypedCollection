@@ -13,14 +13,12 @@ final class TypedCollection extends AbstractTypedCollection
 {
     private string $type;
 
-    /**
-     * @param string $type
-     * @param array|null $elements
-     * @param int $flags
-     * @param string $iteratorClass
-     */
-    public function __construct($type, array $elements = null, $flags = 0, $iteratorClass = \ArrayIterator::class)
-    {
+    public function __construct(
+        string $type,
+        array $elements = null,
+        int $flags = 0,
+        string $iteratorClass = \ArrayIterator::class
+    ) {
         $this->type = $type;
 
         parent::__construct($elements, $flags, $iteratorClass);
