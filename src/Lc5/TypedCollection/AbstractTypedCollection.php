@@ -21,7 +21,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
      * @param int $flags
      * @param string $iteratorClass
      */
-    public function __construct(array $elements = null, $flags = 0, $iteratorClass = 'ArrayIterator')
+    public function __construct(array $elements = null, $flags = 0, $iteratorClass = \ArrayIterator::class)
     {
         if (!is_string($this->getType()) || $this->getType() === '') {
             throw new \LogicException(__CLASS__ . '::getType should return not empty string.');

@@ -19,7 +19,7 @@ final class TypedCollection extends AbstractTypedCollection
      * @param int $flags
      * @param string $iteratorClass
      */
-    public function __construct($type, array $elements = null, $flags = 0, $iteratorClass = 'ArrayIterator')
+    public function __construct($type, array $elements = null, $flags = 0, $iteratorClass = \ArrayIterator::class)
     {
         $this->type = $type;
 
