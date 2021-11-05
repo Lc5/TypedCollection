@@ -8,31 +8,29 @@ namespace Lc5\TypedCollection;
  * Class TypedCollection
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
+ *
+ * @template T
+ * @extends AbstractTypedCollection<T>
  */
-class TypedCollection extends AbstractTypedCollection
+final class TypedCollection extends AbstractTypedCollection
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     /**
-     * @param string $type
-     * @param array|null $elements
-     * @param int $flags
-     * @param string $iteratorClass
+     * @param array<T>|null $elements
      */
-    public function __construct($type, array $elements = null, $flags = 0, $iteratorClass = 'ArrayIterator')
-    {
+    public function __construct(
+        string $type,
+        array $elements = null,
+        int $flags = 0,
+        string $iteratorClass = \ArrayIterator::class
+    ) {
         $this->type = $type;
 
         parent::__construct($elements, $flags, $iteratorClass);
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

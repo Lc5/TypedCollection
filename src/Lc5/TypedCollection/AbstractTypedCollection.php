@@ -8,22 +8,21 @@ namespace Lc5\TypedCollection;
  * Class AbstractTypedCollection
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
+ *
+ * @template T
+ * @extends \ArrayObject<int, T>
  */
 abstract class AbstractTypedCollection extends \ArrayObject
 {
-    /**
-     * @return string
-     */
-    abstract protected function getType();
+    abstract protected function getType(): string;
 
     /**
-     * @param array|null $elements
-     * @param int $flags
-     * @param string $iteratorClass
+     * @param array<T> $elements
+     * @param class-string $iteratorClass
      */
-    public function __construct(array $elements = null, $flags = 0, $iteratorClass = 'ArrayIterator')
+    public function __construct(array $elements = null, int $flags = 0, string $iteratorClass = \ArrayIterator::class)
     {
-        if (!is_string($this->getType()) || strlen($this->getType()) === 0) {
+        if ($this->getType() === '') {
             throw new \LogicException(__CLASS__ . '::getType should return not empty string.');
         }
 
@@ -37,10 +36,10 @@ abstract class AbstractTypedCollection extends \ArrayObject
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
+     * @param int|string|null $offset
+     * @param T $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->checkType($value);
 
@@ -48,12 +47,12 @@ abstract class AbstractTypedCollection extends \ArrayObject
     }
 
     /**
-     * @param mixed $elements
-     * @return array
+     * @param array<T>|object $elements
+     * @return array<T>
      */
-    public function exchangeArray($elements)
+    public function exchangeArray($elements): array
     {
-        foreach ($elements as $element) {
+        foreach ($elements as $element) { /** @phpstan-ignore-line */
             $this->checkType($element);
         }
 
@@ -63,7 +62,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
     /**
      * @param mixed $element
      */
-    protected function checkType($element)
+    protected function checkType($element): void
     {
         $type = $this->getType();
 

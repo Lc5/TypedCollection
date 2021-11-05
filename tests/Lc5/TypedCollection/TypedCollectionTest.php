@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
-class TypedCollectionTest extends TestCase
+final class TypedCollectionTest extends TestCase
 {
-    public function testGetType()
+    public function testGetType(): void
     {
-        $collection = new TypedCollection('type');
+        $typedCollection = new TypedCollection('type');
 
-        $this->assertEquals('type', $collection->getType());
+        $this->assertEquals('type', $typedCollection->getType());
     }
 }
