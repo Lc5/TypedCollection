@@ -8,11 +8,17 @@ namespace Lc5\TypedCollection;
  * Class TypedCollection
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
+ *
+ * @template T
+ * @extends AbstractTypedCollection<T>
  */
 final class TypedCollection extends AbstractTypedCollection
 {
     private string $type;
 
+    /**
+     * @param array<T>|null $elements
+     */
     public function __construct(
         string $type,
         array $elements = null,

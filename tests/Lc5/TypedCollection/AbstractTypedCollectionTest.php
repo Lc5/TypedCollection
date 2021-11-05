@@ -86,11 +86,18 @@ final class AbstractTypedCollectionTest extends TestCase
         $collection->exchangeArray($elements);
     }
 
+    /**
+     * @param array<mixed>|null $elements
+     * @return AbstractTypedCollection<mixed>
+     */
     private function buildCollection(string $type, array $elements = null): AbstractTypedCollection
     {
         return new class($type, $elements) extends AbstractTypedCollection {
             private string $type;
 
+            /**
+             * @param array<mixed> $elements
+             */
             public function __construct(string $type, array $elements = null)
             {
                 $this->type = $type;
@@ -104,6 +111,9 @@ final class AbstractTypedCollectionTest extends TestCase
         };
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function validCollectionDataProvider(): array
     {
         return [
@@ -122,6 +132,9 @@ final class AbstractTypedCollectionTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function invalidCollectionDataProvider(): array
     {
         $allTypes = [true, 1, 1.11, 'string', [], new \stdClass(), fopen('php://memory', 'r'), null, function (): void {
@@ -141,6 +154,9 @@ final class AbstractTypedCollectionTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function validDataProvider(): array
     {
         return [
@@ -158,6 +174,9 @@ final class AbstractTypedCollectionTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function invalidDataProvider(): array
     {
         $allTypes = [

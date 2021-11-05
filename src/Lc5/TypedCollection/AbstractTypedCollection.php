@@ -8,11 +8,18 @@ namespace Lc5\TypedCollection;
  * Class AbstractTypedCollection
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
+ *
+ * @template T
+ * @extends \ArrayObject<int, T>
  */
 abstract class AbstractTypedCollection extends \ArrayObject
 {
     abstract protected function getType(): string;
 
+    /**
+     * @param array<T> $elements
+     * @param class-string $iteratorClass
+     */
     public function __construct(array $elements = null, int $flags = 0, string $iteratorClass = \ArrayIterator::class)
     {
         if ($this->getType() === '') {
@@ -29,8 +36,8 @@ abstract class AbstractTypedCollection extends \ArrayObject
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
+     * @param int|string|null $offset
+     * @param T $value
      */
     public function offsetSet($offset, $value): void
     {
@@ -40,12 +47,12 @@ abstract class AbstractTypedCollection extends \ArrayObject
     }
 
     /**
-     * @param mixed $elements
-     * @return mixed[]
+     * @param array<T>|object $elements
+     * @return array<T>
      */
     public function exchangeArray($elements): array
     {
-        foreach ($elements as $element) {
+        foreach ($elements as $element) { /** @phpstan-ignore-line */
             $this->checkType($element);
         }
 
@@ -55,7 +62,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
     /**
      * @param mixed $element
      */
-    protected function checkType($element)
+    protected function checkType($element): void
     {
         $type = $this->getType();
 
