@@ -59,6 +59,11 @@ abstract class AbstractTypedCollection extends \ArrayObject
         return parent::exchangeArray($elements);
     }
 
+    public function getIterator(): \ArrayIterator
+    {
+        return new \ArrayIterator($this->getArrayCopy());
+    }
+
     /**
      * @param mixed $element
      */
