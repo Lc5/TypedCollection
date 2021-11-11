@@ -159,6 +159,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['object',   [new \stdClass(), new \stdClass()]],
             ['resource', [fopen('php://memory', 'r'), fopen('php://memory', 'r')]],
             ['NULL',     [null, null]],
+            ['iterable', [[], new \ArrayIterator()]],
             [\stdClass::class, [new \stdClass(), new \stdClass()]],
             [\Closure::class,  [function (): void {
             }, function (): void {

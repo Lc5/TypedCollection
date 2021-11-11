@@ -71,7 +71,9 @@ abstract class AbstractTypedCollection extends \ArrayObject
     {
         $type = $this->getType();
 
-        if (gettype($element) !== $type && !$element instanceof $type) {
+        if (gettype($element) !== $type &&
+            !$element instanceof $type &&
+            !($type === 'iterable' && is_iterable($element))) {
             throw new \UnexpectedValueException(
                 'Invalid element type: ' . gettype($element) . '. Only ' . $type . ' is allowed.'
             );
