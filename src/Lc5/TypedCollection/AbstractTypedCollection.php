@@ -61,7 +61,9 @@ abstract class AbstractTypedCollection extends \ArrayObject
 
     public function getIterator(): \ArrayIterator
     {
-        return new \ArrayIterator($this->getArrayCopy());
+        $iteratorClass = $this->getIteratorClass();
+
+        return new $iteratorClass($this->getArrayCopy()); /** @phpstan-ignore-line */
     }
 
     /**
