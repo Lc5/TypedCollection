@@ -11,6 +11,8 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 use UnexpectedValueException;
 
+use function fopen;
+
 /**
  * Class TypedCollectionTest
  *

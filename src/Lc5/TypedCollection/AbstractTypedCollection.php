@@ -9,6 +9,9 @@ use ArrayObject;
 use LogicException;
 use UnexpectedValueException;
 
+use function gettype;
+use function is_iterable;
+
 /**
  * Class AbstractTypedCollection
  *
