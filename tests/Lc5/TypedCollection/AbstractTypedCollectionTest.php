@@ -109,6 +109,17 @@ final class AbstractTypedCollectionTest extends TestCase
         $collection->exchangeArray($elements);
     }
 
+    public function testGetIteratorReturnsArrayCopy(): void
+    {
+        $collection = $this->buildCollection('integer', [1, 2]);
+
+        $iterator = $collection->getIterator();
+        $iterator[] = 3;
+
+        $this->assertSame([1, 2], $collection->getArrayCopy());
+        $this->assertSame([1, 2, 3], $iterator->getArrayCopy());
+    }
+
     /**
      * @param array<mixed>|null $elements
      * @return AbstractTypedCollection<mixed>
