@@ -14,8 +14,6 @@ use UnexpectedValueException;
 use function fopen;
 
 /**
- * Class TypedCollectionTest
- *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
 final class AbstractTypedCollectionTest extends TestCase

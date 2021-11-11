@@ -7,8 +7,6 @@ namespace Lc5\TypedCollection;
 use ArrayIterator;
 
 /**
- * Class TypedCollection
- *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  *
  * @template T
