@@ -21,13 +21,14 @@ An abstract class used to create strictly typed collections implemented as a typ
 The type of elements in a collection is defined by extending ```AbstractTypedCollection``` and implementing abstract
 ```AbstractTypedCollection::getType``` method. It should return the type as a string, which can be any class name or one
 of the internal types in a form recognised by the internal [gettype()](http://php.net/manual/en/function.gettype.php) function
-(```"boolean", "integer", "double", "string", "array", "object", "resource", "NULL"```). ```\UnexpectedValueException```
+(```"boolean", "integer", "double", "string", "array", "object", "resource", "NULL"```). ```UnexpectedValueException```
 will be thrown, when trying to add an element with an invalid type.
         
 ### Usage:
   
 ```php
 use Lc5\TypedCollection\AbstractTypedCollection;
+use Lc5\TypedCollection\Exception\UnexpectedValueException;
 
 class stdClassCollection extends AbstractTypedCollection
 {
@@ -37,19 +38,19 @@ class stdClassCollection extends AbstractTypedCollection
     }
 }
 
-$collection   = new stdClassCollection([new \stdClass(), new \stdClass()]);
+$collection = new stdClassCollection([new \stdClass(), new \stdClass()]);
 $collection[] = new \stdClass();
 
 try {
     $collection[] = 'invalid';
-} catch (\UnexpectedValueException $e) {
-    echo $e->getMessage(); //Invalid element type: string. Only \stdClass is allowed.
+} catch (UnexpectedValueException $e) {
+    echo $e->getMessage(); //Invalid value type: string. Only \stdClass is allowed.
 }
 
 try {
     $collection = new stdClassCollection(['invalid', new \stdClass()]);
-} catch (\UnexpectedValueException $e) {
-    echo $e->getMessage(); //Invalid element type: string. Only \stdClass is allowed.
+} catch (UnexpectedValueException $e) {
+    echo $e->getMessage(); //Invalid value type: string. Only \stdClass is allowed.
 }
 
 ```
@@ -59,17 +60,25 @@ try {
 A strictly typed collection based on ArrayObject. The type of elements in collection is defined using constructor
 argument, which can be any class name or one of the internal types in a form recognised by internal
 [gettype()](http://php.net/manual/en/function.gettype.php) function (```"boolean", "integer", "double", "string",
-"array", "object", "resource", "NULL"```). ```\UnexpectedValueException``` will be thrown, when trying to add element
+"array", "object", "resource", "NULL"```). ```UnexpectedValueException``` will be thrown, when trying to add element
 with invalid type.
 
 ### Usage:
 
 ```php
-use Lc5\TypedCollection\TypedCollection;
+use Lc5\TypedCollection\TypedArray;
+use Lc5\TypedCollection\Exception\UnexpectedValueException;
 
-$elements = [new \stdClass(), new \stdClass()];
+$values = [new \stdClass(), new \stdClass()];
 
-$collection = new TypedCollection(\stdClass::class, $elements);
+$typedCollection = new TypedCollection(\stdClass::class, $values);
+$typedCollection[] = new \stdClass();
+
+try {
+    $typedCollection[] = 'invalid';
+} catch (UnexpectedValueException $e) {
+    echo $e->getMessage(); //Invalid value type: string. Only \stdClass is allowed.
+}
 
 ```
 The behavior is identical as in ```AbstractTypedCollection```.
