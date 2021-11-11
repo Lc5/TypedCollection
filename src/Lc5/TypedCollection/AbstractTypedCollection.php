@@ -84,12 +84,20 @@ abstract class AbstractTypedCollection extends ArrayObject
     {
         $type = $this->getType();
 
-        if (gettype($value) !== $type &&
-            !$value instanceof $type &&
-            !($type === 'iterable' && is_iterable($value))) {
-            throw new UnexpectedValueException(
-                'Invalid element type: ' . gettype($value) . '. Only ' . $type . ' is allowed.'
-            );
+        if (gettype($value) === $type) {
+            return;
         }
+
+        if ($value instanceof $type) {
+            return;
+        }
+
+        if ($type === 'iterable' && is_iterable($value)) {
+            return;
+        }
+
+        throw new UnexpectedValueException(
+            'Invalid element type: ' . gettype($value) . '. Only ' . $type . ' is allowed.'
+        );
     }
 }
