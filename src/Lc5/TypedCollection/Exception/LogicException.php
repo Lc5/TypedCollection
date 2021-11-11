@@ -9,16 +9,8 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Lc5\TypedCollection;
+namespace Lc5\TypedCollection\Exception;
 
-use PHPUnit\Framework\TestCase;
-
-final class TypedCollectionTest extends TestCase
+class LogicException extends \LogicException
 {
-    public function testGetType(): void
-    {
-        $typedCollection = new TypedCollection('type');
-
-        $this->assertSame('type', $typedCollection->getType());
-    }
 }
