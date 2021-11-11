@@ -97,7 +97,7 @@ abstract class AbstractTypedCollection extends ArrayObject
         }
 
         throw new UnexpectedValueException(
-            'Invalid element type: ' . gettype($value) . '. Only ' . $type . ' is allowed.'
+            'Invalid value type: ' . gettype($value) . '. Only ' . $type . ' is allowed.'
         );
     }
 }
