@@ -7,8 +7,6 @@ namespace Lc5\TypedCollection;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class TypedCollectionTest
- *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  */
 final class TypedCollectionTest extends TestCase

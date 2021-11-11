@@ -13,8 +13,6 @@ use function gettype;
 use function is_iterable;
 
 /**
- * Class AbstractTypedCollection
- *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  *
  * @template T
