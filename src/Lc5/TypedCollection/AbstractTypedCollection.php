@@ -17,46 +17,46 @@ abstract class AbstractTypedCollection extends \ArrayObject
     abstract protected function getType(): string;
 
     /**
-     * @param array<T> $elements
+     * @param array<T> $array
      * @param class-string $iteratorClass
      */
-    public function __construct(array $elements = null, int $flags = 0, string $iteratorClass = \ArrayIterator::class)
+    public function __construct(array $array = null, int $flags = 0, string $iteratorClass = \ArrayIterator::class)
     {
         if ($this->getType() === '') {
             throw new \LogicException(__CLASS__ . '::getType should return not empty string.');
         }
 
-        $elements = (array) $elements;
+        $array = (array) $array;
 
-        foreach ($elements as $element) {
-            $this->checkType($element);
+        foreach ($array as $value) {
+            $this->checkType($value);
         }
 
-        parent::__construct($elements, $flags, $iteratorClass);
+        parent::__construct($array, $flags, $iteratorClass);
     }
 
     /**
-     * @param int|string|null $offset
+     * @param int|string|null $key
      * @param T $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet($key, $value): void
     {
         $this->checkType($value);
 
-        parent::offsetSet($offset, $value);
+        parent::offsetSet($key, $value);
     }
 
     /**
-     * @param array<T>|object $elements
+     * @param array<T>|object $array
      * @return array<T>
      */
-    public function exchangeArray($elements): array
+    public function exchangeArray($array): array
     {
-        foreach ($elements as $element) { /** @phpstan-ignore-line */
-            $this->checkType($element);
+        foreach ($array as $value) { /** @phpstan-ignore-line */
+            $this->checkType($value);
         }
 
-        return parent::exchangeArray($elements);
+        return parent::exchangeArray($array);
     }
 
     public function getIterator(): \ArrayIterator
@@ -65,17 +65,17 @@ abstract class AbstractTypedCollection extends \ArrayObject
     }
 
     /**
-     * @param mixed $element
+     * @param mixed $value
      */
-    protected function checkType($element): void
+    protected function checkType($value): void
     {
         $type = $this->getType();
 
-        if (gettype($element) !== $type &&
-            !$element instanceof $type &&
-            !($type === 'iterable' && is_iterable($element))) {
+        if (gettype($value) !== $type &&
+            !$value instanceof $type &&
+            !($type === 'iterable' && is_iterable($value))) {
             throw new \UnexpectedValueException(
-                'Invalid element type: ' . gettype($element) . '. Only ' . $type . ' is allowed.'
+                'Invalid element type: ' . gettype($value) . '. Only ' . $type . ' is allowed.'
             );
         }
     }

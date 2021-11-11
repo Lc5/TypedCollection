@@ -15,49 +15,49 @@ final class AbstractTypedCollectionTest extends TestCase
 {
     /**
      * @dataProvider validCollectionDataProvider
-     * @param array<int, mixed> $elements
+     * @param array<int, mixed> $array
      */
-    public function testConstruct(string $type, array $elements): void
+    public function testConstruct(string $type, array $array): void
     {
-        $collection = $this->buildCollection($type, $elements);
+        $collection = $this->buildCollection($type, $array);
 
-        $this->assertSame($elements, (array) $collection);
+        $this->assertSame($array, (array) $collection);
     }
 
     /**
      * @dataProvider validDataProvider
-     * @param mixed $element
+     * @param mixed $value
      */
-    public function testOffsetSet(string $type, $element): void
+    public function testOffsetSet(string $type, $value): void
     {
         $collection = $this->buildCollection($type);
-        $collection[] = $element;
+        $collection[] = $value;
 
-        $this->assertSame($element, $collection[0]);
+        $this->assertSame($value, $collection[0]);
     }
 
     /**
      * @dataProvider validDataProvider
-     * @param mixed $element
+     * @param mixed $value
      */
-    public function testAppend(string $type, $element): void
+    public function testAppend(string $type, $value): void
     {
         $collection = $this->buildCollection($type);
-        $collection->append($element);
+        $collection->append($value);
 
-        $this->assertSame($element, $collection[0]);
+        $this->assertSame($value, $collection[0]);
     }
 
     /**
      * @dataProvider validCollectionDataProvider
-     * @param array<int, mixed> $elements
+     * @param array<int, mixed> $array
      */
-    public function testExchangeArray(string $type, array $elements): void
+    public function testExchangeArray(string $type, array $array): void
     {
         $collection = $this->buildCollection($type);
-        $collection->exchangeArray($elements);
+        $collection->exchangeArray($array);
 
-        $this->assertSame($elements, (array) $collection);
+        $this->assertSame($array, (array) $collection);
     }
 
     public function testConstructThrowsLogicException(): void
@@ -68,45 +68,45 @@ final class AbstractTypedCollectionTest extends TestCase
 
     /**
      * @dataProvider invalidCollectionDataProvider
-     * @param array<int, mixed> $elements
+     * @param array<int, mixed> $array
      */
-    public function testConstructThrowsUnexpectedValueException(string $type, array $elements): void
+    public function testConstructThrowsUnexpectedValueException(string $type, array $array): void
     {
         $this->expectException(\UnexpectedValueException::class);
-        $this->buildCollection($type, $elements);
+        $this->buildCollection($type, $array);
     }
 
     /**
      * @dataProvider invalidDataProvider
-     * @param mixed $element
+     * @param mixed $value
      */
-    public function testOffsetSetThrowsUnexpectedValueException(string $type, $element): void
+    public function testOffsetSetThrowsUnexpectedValueException(string $type, $value): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
-        $collection[] = $element;
+        $collection[] = $value;
     }
 
     /**
      * @dataProvider invalidDataProvider
-     * @param mixed $element
+     * @param mixed $value
      */
-    public function testAppendThrowsUnexpectedValueException(string $type, $element): void
+    public function testAppendThrowsUnexpectedValueException(string $type, $value): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
-        $collection->append($element);
+        $collection->append($value);
     }
 
     /**
      * @dataProvider invalidCollectionDataProvider
-     * @param array<int, mixed> $elements
+     * @param array<int, mixed> $array
      */
-    public function testExchangeArrayThrowsUnexpectedValueException(string $type, array $elements): void
+    public function testExchangeArrayThrowsUnexpectedValueException(string $type, array $array): void
     {
         $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
-        $collection->exchangeArray($elements);
+        $collection->exchangeArray($array);
     }
 
     public function testGetIteratorReturnsArrayCopy(): void
@@ -121,21 +121,21 @@ final class AbstractTypedCollectionTest extends TestCase
     }
 
     /**
-     * @param array<mixed>|null $elements
+     * @param array<mixed>|null $array
      * @return AbstractTypedCollection<mixed>
      */
-    private function buildCollection(string $type, array $elements = null): AbstractTypedCollection
+    private function buildCollection(string $type, array $array = null): AbstractTypedCollection
     {
-        return new class($type, $elements) extends AbstractTypedCollection {
+        return new class($type, $array) extends AbstractTypedCollection {
             private string $type;
 
             /**
-             * @param array<mixed> $elements
+             * @param array<mixed> $array
              */
-            public function __construct(string $type, array $elements = null)
+            public function __construct(string $type, array $array = null)
             {
                 $this->type = $type;
-                parent::__construct($elements);
+                parent::__construct($array);
             }
 
             protected function getType(): string
