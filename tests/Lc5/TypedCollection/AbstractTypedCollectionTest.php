@@ -166,8 +166,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['NULL',     [null, null]],
             ['iterable', [[], new ArrayIterator()]],
             [stdClass::class, [new stdClass(), new stdClass()]],
-            [
-                Closure::class,  [function (): void {
+            [Closure::class,  [function (): void {
             }, function (): void {
             }]]
         ];
@@ -212,8 +211,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['NULL',     null],
             ['iterable', []],
             [stdClass::class, new stdClass()],
-            [
-                Closure::class,  function (): void {
+            [Closure::class,  function (): void {
             }]
         ];
     }
