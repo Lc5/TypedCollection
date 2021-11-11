@@ -17,6 +17,6 @@ final class TypedCollectionTest extends TestCase
     {
         $typedCollection = new TypedCollection('type');
 
-        $this->assertEquals('type', $typedCollection->getType());
+        $this->assertSame('type', $typedCollection->getType());
     }
 }
