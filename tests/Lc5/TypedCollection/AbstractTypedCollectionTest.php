@@ -37,6 +37,18 @@ final class AbstractTypedCollectionTest extends TestCase
     }
 
     /**
+     * @dataProvider validDataProvider
+     * @param mixed $element
+     */
+    public function testAppend(string $type, $element): void
+    {
+        $collection = $this->buildCollection($type);
+        $collection->append($element);
+
+        $this->assertSame($element, $collection[0]);
+    }
+
+    /**
      * @dataProvider validCollectionDataProvider
      * @param array<int, mixed> $elements
      */
@@ -73,6 +85,17 @@ final class AbstractTypedCollectionTest extends TestCase
         $this->expectException(\UnexpectedValueException::class);
         $collection = $this->buildCollection($type);
         $collection[] = $element;
+    }
+
+    /**
+     * @dataProvider invalidDataProvider
+     * @param mixed $element
+     */
+    public function testAppendThrowsUnexpectedValueException(string $type, $element): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $collection = $this->buildCollection($type);
+        $collection->append($element);
     }
 
     /**
