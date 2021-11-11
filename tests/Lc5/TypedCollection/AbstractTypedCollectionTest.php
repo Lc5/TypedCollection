@@ -184,6 +184,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['object',   $allTypes],
             ['resource', $allTypes],
             ['NULL',     $allTypes],
+            ['iterable', $allTypes],
             [\stdClass::class, $allTypes],
             [\Closure::class,  $allTypes],
         ];
@@ -203,6 +204,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['object',   new \stdClass()],
             ['resource', fopen('php://memory', 'r+')],
             ['NULL',     null],
+            ['iterable', []],
             [\stdClass::class, new \stdClass()],
             [\Closure::class,  function (): void {
             }]
@@ -223,6 +225,7 @@ final class AbstractTypedCollectionTest extends TestCase
             'object' => new \stdClass(),
             'resource' => fopen('php://memory', 'r'),
             'NULL' => null,
+            'iterable' => new \ArrayIterator(),
             \stdClass::class => new \stdClass(),
             \Closure::class => function (): void {
             }
@@ -236,6 +239,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['boolean', $allTypes['object']],
             ['boolean', $allTypes['resource']],
             ['boolean', $allTypes['NULL']],
+            ['boolean', $allTypes['iterable']],
             ['boolean', $allTypes[\stdClass::class]],
             ['boolean', $allTypes[\Closure::class]],
 
@@ -246,6 +250,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['integer', $allTypes['object']],
             ['integer', $allTypes['resource']],
             ['integer', $allTypes['NULL']],
+            ['integer', $allTypes['iterable']],
             ['integer', $allTypes[\stdClass::class]],
             ['integer', $allTypes[\Closure::class]],
 
@@ -256,6 +261,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['double', $allTypes['object']],
             ['double', $allTypes['resource']],
             ['double', $allTypes['NULL']],
+            ['double', $allTypes['iterable']],
             ['double', $allTypes[\stdClass::class]],
             ['double', $allTypes[\Closure::class]],
 
@@ -266,6 +272,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['string', $allTypes['object']],
             ['string', $allTypes['resource']],
             ['string', $allTypes['NULL']],
+            ['string', $allTypes['iterable']],
             ['string', $allTypes[\stdClass::class]],
             ['string', $allTypes[\Closure::class]],
 
@@ -276,6 +283,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['array', $allTypes['object']],
             ['array', $allTypes['resource']],
             ['array', $allTypes['NULL']],
+            ['array', $allTypes['iterable']],
             ['array', $allTypes[\stdClass::class]],
             ['array', $allTypes[\Closure::class]],
 
@@ -294,6 +302,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['resource', $allTypes['array']],
             ['resource', $allTypes['object']],
             ['resource', $allTypes['NULL']],
+            ['resource', $allTypes['iterable']],
             ['resource', $allTypes[\stdClass::class]],
             ['resource', $allTypes[\Closure::class]],
 
@@ -304,6 +313,7 @@ final class AbstractTypedCollectionTest extends TestCase
             ['NULL', $allTypes['array']],
             ['NULL', $allTypes['object']],
             ['NULL', $allTypes['resource']],
+            ['NULL', $allTypes['iterable']],
             ['NULL', $allTypes[\stdClass::class]],
             ['NULL', $allTypes[\Closure::class]],
 
@@ -314,6 +324,7 @@ final class AbstractTypedCollectionTest extends TestCase
             [\stdClass::class, $allTypes['array']],
             [\stdClass::class, $allTypes['resource']],
             [\stdClass::class, $allTypes['NULL']],
+            [\stdClass::class, $allTypes['iterable']],
             [\stdClass::class, $allTypes[\Closure::class]],
 
             [\Closure::class, $allTypes['boolean']],
@@ -324,6 +335,7 @@ final class AbstractTypedCollectionTest extends TestCase
             [\Closure::class, $allTypes['object']],
             [\Closure::class, $allTypes['resource']],
             [\Closure::class, $allTypes['NULL']],
+            [\Closure::class, $allTypes['iterable']],
             [\Closure::class, $allTypes[\stdClass::class]]
         ];
     }
