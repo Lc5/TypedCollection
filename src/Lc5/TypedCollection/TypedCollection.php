@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lc5\TypedCollection;
 
+use ArrayIterator;
+
 /**
  * Class TypedCollection
  *
@@ -23,7 +25,7 @@ final class TypedCollection extends AbstractTypedCollection
         string $type,
         array $array = null,
         int $flags = 0,
-        string $iteratorClass = \ArrayIterator::class
+        string $iteratorClass = ArrayIterator::class
     ) {
         $this->type = $type;
 

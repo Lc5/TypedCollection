@@ -4,15 +4,20 @@ declare(strict_types=1);
 
 namespace Lc5\TypedCollection;
 
+use ArrayIterator;
+use ArrayObject;
+use LogicException;
+use UnexpectedValueException;
+
 /**
  * Class AbstractTypedCollection
  *
  * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
  *
  * @template T
- * @extends \ArrayObject<int, T>
+ * @extends ArrayObject<int, T>
  */
-abstract class AbstractTypedCollection extends \ArrayObject
+abstract class AbstractTypedCollection extends ArrayObject
 {
     abstract protected function getType(): string;
 
@@ -20,10 +25,10 @@ abstract class AbstractTypedCollection extends \ArrayObject
      * @param array<T> $array
      * @param class-string $iteratorClass
      */
-    public function __construct(array $array = null, int $flags = 0, string $iteratorClass = \ArrayIterator::class)
+    public function __construct(array $array = null, int $flags = 0, string $iteratorClass = ArrayIterator::class)
     {
         if ($this->getType() === '') {
-            throw new \LogicException(__CLASS__ . '::getType should return not empty string.');
+            throw new LogicException(__CLASS__ . '::getType should return not empty string.');
         }
 
         $array = (array) $array;
@@ -59,7 +64,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
         return parent::exchangeArray($array);
     }
 
-    public function getIterator(): \ArrayIterator
+    public function getIterator(): ArrayIterator
     {
         $iteratorClass = $this->getIteratorClass();
 
@@ -76,7 +81,7 @@ abstract class AbstractTypedCollection extends \ArrayObject
         if (gettype($value) !== $type &&
             !$value instanceof $type &&
             !($type === 'iterable' && is_iterable($value))) {
-            throw new \UnexpectedValueException(
+            throw new UnexpectedValueException(
                 'Invalid element type: ' . gettype($value) . '. Only ' . $type . ' is allowed.'
             );
         }
