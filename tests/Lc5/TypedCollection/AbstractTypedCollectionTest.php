@@ -1,21 +1,25 @@
 <?php
 
 declare(strict_types=1);
-
+/*
+ * This file is part of the lc5/typed-collection package.
+ *
+ * (c) Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Lc5\TypedCollection;
 
 use ArrayIterator;
 use Closure;
-use LogicException;
+use Lc5\TypedCollection\Exception\LogicException;
+use Lc5\TypedCollection\Exception\UnexpectedValueException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use UnexpectedValueException;
 
 use function fopen;
 
-/**
- * @author Łukasz Krzyszczak <lukasz.krzyszczak@gmail.com>
- */
 final class AbstractTypedCollectionTest extends TestCase
 {
     /**
